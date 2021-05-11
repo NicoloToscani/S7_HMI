@@ -90,6 +90,8 @@ namespace Progetto_Supervisione_ITIS
             _timer.Interval = 100;
             _timer.Elapsed += OnTimerElapsed;
             _timer.Start();
+            ledBulb = new Bulb.LedBulb();
+            
 
         }
 
@@ -175,8 +177,24 @@ namespace Progetto_Supervisione_ITIS
 
                     stato_luce_1 = s7PlcService.TBX_segnalazione;
 
-                    if (stato_luce_1 == true) TBX_Segnalazione.Text = "Acceso";
-                    else if (stato_luce_1 == false) TBX_Segnalazione.Text = "Spento";
+                    if (stato_luce_1 == true)
+                    {
+                        // Segnalazione acceso
+                        TBX_Segnalazione.Text = "Acceso";
+
+                        // Accensione led sinottico 
+                        ledBulb.On = true;
+                    }
+                    else if (stato_luce_1 == false)
+                    {
+                        // Segnalazione spento
+                        TBX_Segnalazione.Text = "Spento";
+
+                        // Spengo led sinottico
+                        ledBulb.On = false;
+                    }
+
+                    
 
                     
 
@@ -224,6 +242,16 @@ namespace Progetto_Supervisione_ITIS
 
         }
 
-       
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ledBulb1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
     }
 }
